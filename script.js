@@ -258,16 +258,57 @@ window.addEventListener("load", () => {
   }, 450);
 });
 
-document.querySelector(".contact-form")?.addEventListener("submit", (event) => {
+document.querySelector(".contact-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const form = event.currentTarget;
   const submitButton = event.currentTarget.querySelector("button[type='submit']");
   const originalLabel = submitButton.textContent;
-  submitButton.textContent = "Inquiry Sent";
+  const endpoint = form.dataset.sheetEndpoint;
+
+  if (!endpoint || endpoint === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
+    submitButton.textContent = "Add Script URL";
+    submitButton.disabled = true;
+    setTimeout(() => {
+      submitButton.textContent = originalLabel;
+      submitButton.disabled = false;
+    }, 1800);
+    return;
+  }
+
+  const formData = new FormData(form);
+  const payload = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    business: formData.get("business"),
+    service: formData.get("service"),
+    message: formData.get("message")
+  };
+
+  submitButton.textContent = "Sending...";
   submitButton.disabled = true;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error("Request failed");
+    }
+
+    submitButton.textContent = "Inquiry Sent";
+    form.reset();
+  } catch (error) {
+    submitButton.textContent = "Try Again";
+  }
 
   setTimeout(() => {
     submitButton.textContent = originalLabel;
     submitButton.disabled = false;
-    event.currentTarget.reset();
   }, 1800);
 });
