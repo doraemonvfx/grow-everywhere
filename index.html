@@ -51,7 +51,16 @@
 <body>
   <div class="page-loader" aria-hidden="true">
     <div class="loader-mark">
-      <span class="loader-ring"></span>
+      <div class="loader-graph" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="loader-line" aria-hidden="true">
+        <span></span>
+      </div>
       <span class="loader-text">Loading growth systems...</span>
     </div>
   </div>
@@ -571,11 +580,11 @@
           <div class="contact-cards">
             <article><strong>Phone</strong><a href="tel:+917991303316">+91 79913 03316</a><p>Speak directly with our marketplace and growth team.</p></article>
             <article><strong>WhatsApp</strong><a href="https://wa.me/917991303316" target="_blank" rel="noreferrer">Chat instantly</a><p>Quick answers, faster collaboration and zero friction.</p></article>
-            <article><strong>Email</strong><a href="mailto:ashu@pixrays.in">ashu@pixrays.in</a><p>Share requirements, timelines and growth priorities.</p></article>
+            <article><strong>Email</strong><a href="mailto:hello@example.com">hello@example.com</a><p>Share requirements, timelines and growth priorities.</p></article>
             <article><strong>Location</strong><span>India</span><p>Supporting brands remotely with end-to-end execution.</p></article>
           </div>
         </div>
-        <form class="contact-form reveal" aria-label="Contact form">
+        <form class="contact-form reveal" aria-label="Contact form" data-sheet-endpoint="https://script.google.com/macros/s/AKfycbygldgW6UsBRxFT8lCseZagP2W4eA4pCKBrHoUseMkZOd0oYvslz_hscsalfCZbEyrZqw/exec">
           <label>
             <span>Name</span>
             <input type="text" name="name" placeholder="Your full name" required>
